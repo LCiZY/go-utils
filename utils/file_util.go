@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/LCiZY/blog-backend-lib/log"
+	"github.com/LCiZY/go-utils/log"
 )
 
 func IsDir(path string) bool {

@@ -3,7 +3,7 @@ package router
 import (
 	"net/http"
 
-	"github.com/LCiZY/blog-backend-lib/utils"
+	"github.com/LCiZY/go-utils/utils"
 )
 
 func Get(pattern string, f http.HandlerFunc) {

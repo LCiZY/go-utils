@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/LCiZY/blog-backend-lib/model"
+	"github.com/LCiZY/go-utils/model"
 )
 
 func SetAllowCROS(w *http.ResponseWriter) {
