@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/LCiZY/go-utils/log"
+	"github.com/LCiZY/go-utils/logs"
 )
 
 func IsDir(path string) bool {
@@ -36,7 +36,7 @@ func ReName(src, dst string) bool {
 func Remove(path string) bool {
 	err := os.Remove(path)
 	if err != nil {
-		log.Error("remove file failed, err: %v", err)
+		logs.Error("remove file failed, err: %v", err)
 		return false
 	}
 	return true
@@ -46,14 +46,14 @@ func GetFileLastModifyTime(path, format string) string {
 	//获取文件修改时间 返回unix时间戳
 	f, err := os.Open(path)
 	if err != nil {
-		log.Error("open file failed, err: %v", err)
+		logs.Error("open file failed, err: %v", err)
 		return time.Now().Format(format)
 	}
 	defer f.Close()
 
 	fi, err := f.Stat()
 	if err != nil {
-		log.Error("stat fileinfo error: %v", err)
+		logs.Error("stat fileinfo error: %v", err)
 		return time.Now().Format(format)
 	}
 	return fi.ModTime().Format(format)
@@ -62,14 +62,14 @@ func GetFileLastModifyTime(path, format string) string {
 func SaveToDisk(file multipart.File, path string) bool {
 	out, err := os.Create(path)
 	if err != nil {
-		log.Error("failed to open the file %s for writing, err: %v", path, err)
+		logs.Error("failed to open the file %s for writing, err: %v", path, err)
 		return false
 	}
 	defer file.Close()
 	defer out.Close()
 	_, err = io.Copy(out, file)
 	if err != nil {
-		log.Error("copy file failed, err:%s", err)
+		logs.Error("copy file failed, err:%s", err)
 		return false
 	}
 	return true
@@ -79,7 +79,7 @@ func IsImageExist(path string) bool {
 	_, err := os.Stat(path)
 	if err != nil {
 		if !os.IsNotExist(err) {
-			log.Error("IsImageExist: path: %s, error: %v", path, err)
+			logs.Error("IsImageExist: path: %s, error: %v", path, err)
 		}
 		return false
 	}
