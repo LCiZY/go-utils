@@ -5,7 +5,6 @@ import (
 	"os"
 	"runtime"
 	"strings"
-	"sync"
 	"time"
 )
 
@@ -33,8 +32,6 @@ func Debug(format string, objects ...interface{}) {
 	printLog(debugPrefix, format, objects...)
 }
 
-var logLock sync.Mutex
-
 func printLog(logType, format string, objects ...interface{}) {
 	funcName, file, line, ok := runtime.Caller(2) //弹出两层函数栈再打印
 	var prefix string
@@ -45,13 +42,9 @@ func printLog(logType, format string, objects ...interface{}) {
 		prefix = fmt.Sprintf("%-9s [%-19s]   ", logType, time.Now().Format("2006-01-02 15:04:05"))
 	}
 	// fmt.Printf( prefix + format + "\n", objects...)
-	logLock.Lock()
 	fmt.Fprintf(os.Stdout, prefix+format+"\n", objects...)
-	logLock.Unlock()
 	if logType == errorPrefix || logType == fatalPrefix {
-		logLock.Lock()
 		fmt.Fprintf(os.Stderr, prefix+format+"\n", objects...)
-		logLock.Unlock()
 	}
 
 }

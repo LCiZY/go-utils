@@ -79,25 +79,6 @@ func AddExtensionFromUrl(filename string, url string) string {
 	return filename + url[idx:]
 }
 
-func HasSupportImgSuffix(path string) bool {
-	extensions := [...]string{
-		".png",
-		".jpg",
-		".jpeg",
-	}
-	if idx := strings.LastIndex(path, "."); idx != -1 && idx != len(path)-1 {
-		flag := false
-		ext := path[idx:]
-		for _, e := range extensions {
-			if e == ext {
-				flag = true
-			}
-		}
-		return flag
-	}
-	return false
-}
-
 func AddSuffixToNameBeforeExtension(prefix, path string) string {
 	idx := strings.LastIndex(path, ".")
 	return path[:idx] + prefix + path[idx:]
