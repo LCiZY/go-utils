@@ -42,6 +42,13 @@ func GetFileNameFromURL(url string) string {
 	}
 	return ""
 }
+func GetExtensionFromURL(url string) string {
+	idx := strings.LastIndex(url, ".")
+	if -1 == idx {
+		return ""
+	}
+	return url[idx:]
+}
 
 func IsPathLegal(path string) bool {
 	if len(path) == 0 {

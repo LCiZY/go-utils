@@ -115,14 +115,16 @@ func init() {
 	supportedImageExtension["bmp"] = struct{}{}
 	supportedImageExtension["tif"] = struct{}{}
 	supportedImageExtension["ico"] = struct{}{}
+	supportedImageExtension["webp"] = struct{}{}
 
-	fileTypeMap.Store("ffd8", "jpg")     //JPEG (jpg)
-	fileTypeMap.Store("89504e47", "png") //PNG (png)
-	fileTypeMap.Store("47494638", "gif") //GIF (gif)
-	fileTypeMap.Store("4949", "tif")     //TIFF (tif)
-	fileTypeMap.Store("4d4d", "tif")     //TIFF (tif)
-	fileTypeMap.Store("424d", "bmp")     //16色位图(bmp)
-	fileTypeMap.Store("00000100", "ico") //ico
+	fileTypeMap.Store("ffd8", "jpg")      //JPEG (jpg)
+	fileTypeMap.Store("89504e47", "png")  //PNG (png)
+	fileTypeMap.Store("47494638", "gif")  //GIF (gif)
+	fileTypeMap.Store("4949", "tif")      //TIFF (tif)
+	fileTypeMap.Store("4d4d", "tif")      //TIFF (tif)
+	fileTypeMap.Store("424d", "bmp")      //16色位图(bmp)
+	fileTypeMap.Store("00000100", "ico")  //ico
+	fileTypeMap.Store("52494646", "webp") //webp
 }
 
 // 获取前面结果字节的16进制
@@ -143,6 +145,7 @@ func bytesToHexString(src []byte) string {
 	return res.String()
 }
 
+// GetFileType
 // 用文件前面几个字节来判断
 // fSrc: 文件字节流（就用前面几个字节）
 func GetFileType(fSrc []byte) string {
