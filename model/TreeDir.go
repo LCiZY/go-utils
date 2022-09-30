@@ -1,6 +1,7 @@
 package model
 
 type TreeDir struct {
+	ID          string     `json:"id,omitempty"`
 	Label       string     `json:"label,omitempty"`
 	Children    []*TreeDir `json:"children,omitempty"`
 	RPath       string     `json:"r_path,omitempty"`
