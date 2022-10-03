@@ -173,8 +173,13 @@ func IsImage(bytes []byte) bool {
 }
 
 // IsSupportedImageExt 返回是否支持此图片后缀
-// ext: 后缀，不包含点
 func IsSupportedImageExt(ext string) bool {
+	if ext == "" {
+		return false
+	}
+	if ext[:1] == "." {
+		ext = ext[1:]
+	}
 	_, e := supportedImageExtension[ext]
 	return e
 }
