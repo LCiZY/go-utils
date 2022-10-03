@@ -148,6 +148,7 @@ func bytesToHexString(src []byte) string {
 // GetFileType
 // 用文件前面几个字节来判断
 // fSrc: 文件字节流（就用前面几个字节）
+// 返回文件后缀类型，不包含点
 func GetFileType(fSrc []byte) string {
 	var fileType string
 	fileCode := bytesToHexString(fSrc)
@@ -169,4 +170,11 @@ func IsImage(bytes []byte) bool {
 	}
 	_, exist := supportedImageExtension[GetFileType(bytes[:10])]
 	return exist
+}
+
+// IsSupportedImageExt 返回是否支持此图片后缀
+// ext: 后缀，不包含点
+func IsSupportedImageExt(ext string) bool {
+	_, e := supportedImageExtension[ext]
+	return e
 }
